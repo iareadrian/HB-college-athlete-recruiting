@@ -9,9 +9,12 @@ def create_student_user(student_email,
                         gender,
                         height,
                         weight,
-                        sport_name, 
-                        position_id,
-                        location_id, bio):
+                        sport_name,
+                        # position_id and location_id commented out for testing
+                        # since the models don't exist yet
+                        # position_id,
+                        # location_id,
+                        bio):
     '''Create and return a new student user'''
 
     student = Student(student_email=student_email,
@@ -22,8 +25,9 @@ def create_student_user(student_email,
                       height=height,
                       weight=weight,
                       sport_name=sport_name,
-                      position_id=position_id,
-                      location_id=location_id,
+                    #   position_id and location_id commented out for testing  
+                    #   position_id=position_id,
+                    #   location_id=location_id,
                       bio=bio)
     
     return student
