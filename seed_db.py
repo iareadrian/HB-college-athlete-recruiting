@@ -6,7 +6,7 @@ import model
 import server
 
 os.system('dropdb team_up')
-os.system('createdb ratings')
+os.system('createdb team_up')
 
 model.connect_to_db(server.app)
 model.db.create_all()
