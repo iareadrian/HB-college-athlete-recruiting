@@ -51,6 +51,12 @@ def create_location(city, state):
     return location
 
 
+def get_student_by_email(student_email):
+    '''Return a student user by email'''
+
+    return Student.query.filter(Student.student_email == student_email).first()
+
+
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)

@@ -2,7 +2,37 @@
 {% block title %}Team Up Home{% endblock %}
 
 {% block body %}
-<h1>Under Construction</h1>
+<h1>Team up with your dream team!</h1>
 <!--TODO: add login form and create user buttons-->
+
+<h2>Login</h2>
+<form action="/login" method="POST">
+    <p>
+        Email <input type="text" name="email">
+    </p>
+
+    <p>
+        Password <input type="text" name="password">
+    </p>
+
+    <p>
+        <input type="submit">
+    </p>
+</form>
+
+<h2>Create an Account</h2>
+<form action="/users" method="POST">
+    <p>
+        Email <input type="text" name="email">
+    </p>
+
+    <p>
+        Password <input type="text" name="password">
+    </p>
+
+    <p>
+        <input type="submit">
+    </p>
+</form>
 
 {% endblock %}
