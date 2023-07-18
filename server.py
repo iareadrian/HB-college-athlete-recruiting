@@ -29,7 +29,7 @@ def register_student_user():
     if student_user:
         flash('An account with that email already exists. Try again.')
     else:
-        student_user = crud.create_student_user(email, password)
+        student_user = crud.create_student_login(email, password)
         db.session.add(student_user)
         db.session.commit()
         flash('Success! Please log in.')

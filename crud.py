@@ -57,6 +57,15 @@ def get_student_by_email(student_email):
     return Student.query.filter(Student.student_email == student_email).first()
 
 
+def create_student_login(student_email, student_password):
+    '''Create and return new student login credentials'''
+
+    student_login = Student(student_email=student_email,
+                            student_password=student_password)
+
+    return student_login
+
+
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)
