@@ -46,6 +46,13 @@ for n in range(3):
     model.db.session.add(student_user)
     model.db.session.commit()
 
+school_city_state = crud.create_location('Berkeley', 'California')
+model.db.session.add(school_city_state)
+model.db.session.commit()
+
+uc_berkeley = crud.create_school('UC Berkeley', school_city_state.location_id)
+model.db.session.add(uc_berkeley)
+model.db.session.commit()
 
 # Create 3 test coach users
 for n in range(3):
@@ -54,5 +61,11 @@ for n in range(3):
     fname = 'Mark'
     lname = 'Fox'
     bio = "Mark Fox is the men's basketball coach at Cal"
-    school_id =
+    school_id = uc_berkeley.school_id
     school_sport = basketball.sport_name
+
+    coach_user = crud.create_coach_user(coach_email, coach_password, fname,
+                                        lname, bio, school_id, school_sport)
+
+    model.db.session.add(coach_user)
+    model.db.session.commit()
