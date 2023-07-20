@@ -18,7 +18,7 @@ def homepage():
     return render_template('homepage.html')
 
 
-@app.route('/users', methods=['POST'])
+@app.route('/register/student', methods=['POST'])
 def register_student_user():
     '''Create a new student user'''
 
@@ -28,13 +28,43 @@ def register_student_user():
     student_user = crud.get_student_by_email(email)
     if student_user:
         flash('An account with that email already exists. Try again.')
+
+        return redirect('/')
     else:
         student_user = crud.create_student_login(email, password)
         db.session.add(student_user)
         db.session.commit()
-        flash('Success! Please log in.')
+        flash('Success!')
 
-    return redirect('/')
+        return redirect('/complete-student-profile')
+
+
+@app.route('/register/coach', methods=['POST'])
+def register_coach_user():
+    '''Create a new coach user'''
+
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    coach_user = crud.get_coach_by_email(email)
+    if coach_user:
+        flash('An account with that email already exists. Try again.')
+
+        return redirect('/')
+    else:
+        coach_user = crud.create_coach_login(email, password)
+        db.session.add(coach_user)
+        db.session.commit()
+        flash('Success!')
+
+        return redirect('/complete-student-profile')
+
+
+@app.route('/complete-student-profile')
+def complete_profile():
+    '''Finish creating a student profile'''
+
+    return render_template('complete-student-profile.html')
 
 
 

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{% block title %}Team Up Home{% endblock %}
+
+{% block title %} Team Up Home {% endblock %}
 
 {% block body %}
 <h1>Team up with your dream team!</h1>
@@ -23,7 +24,22 @@
 <h2>Create an Account</h2>
 
 <h3>Are you a student?</h3>
-<form action="/users" method="POST">
+<form action="/register/student" method="POST">
+    <p>
+        Email <input type="text" name="email">
+    </p>
+
+    <p>
+        Password <input type="text" name="password">
+    </p>
+
+    <p>
+        <input type="submit">
+    </p>
+</form>
+
+<h3>Are you a coach?</h3>
+<form action="/register/coach" method="POST">
     <p>
         Email <input type="text" name="email">
     </p>

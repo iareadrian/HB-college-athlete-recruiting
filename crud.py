@@ -86,6 +86,22 @@ def create_coach_user(coach_email,
 
     return coach
 
+
+def get_coach_by_email(coach_email):
+    '''Return a coach user by email'''
+
+    return model.Coach.query.filter(model.Coach.coach_email == coach_email).first()
+
+
+def create_coach_login(coach_email, coach_password):
+    '''Create and return new coach login credentials'''
+
+    coach_login = model.Coach(coach_email=coach_email,
+                            coach_password=coach_password)
+
+    return coach_login
+
+
 def create_school(school_name, location_id=None):
     '''Create and return a new school'''
 
