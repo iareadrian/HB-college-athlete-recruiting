@@ -34,6 +34,7 @@ def register_student_user():
         student_user = crud.create_student_login(email, password)
         db.session.add(student_user)
         db.session.commit()
+        session['account_type'] = 'student'
         flash('Success!')
 
         return redirect('/complete-student-profile')
@@ -55,6 +56,7 @@ def register_coach_user():
         coach_user = crud.create_coach_login(email, password)
         db.session.add(coach_user)
         db.session.commit()
+        session['account_type'] = 'coach'
         flash('Success!')
 
         return redirect('/complete-student-profile')
