@@ -73,9 +73,15 @@ def show_student_form():
 def finish_student_profile():
     '''Creates a student profile after registration'''
 
-    # Placeholder.  Should redirect to the student profile page
-    return redirect('/complete-student-profile')
 
+    return redirect('/student-profile')
+
+
+@app.route('/student-profile')
+def show_student_profile():
+    '''Show student profile'''
+
+    return render_template('student-profile.html')
 
 @app.route('/complete-coach-profile')
 def show_coach_form():
@@ -90,7 +96,14 @@ def finish_coach_profile():
 
     # This line is a placeholder.
     # Needs to go to the coach's profile page
-    return redirect('/complete-coach-profile')
+    return redirect('/coach-profile')
+
+
+@app.route('/coach-profile')
+def show_coach_profile():
+    '''Show coach profile'''
+
+    return render_template('coach-profile.html')
 
 
 
