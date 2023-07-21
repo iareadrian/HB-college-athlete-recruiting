@@ -34,7 +34,7 @@ def register_student_user():
         student_user = crud.create_student_login(email, password)
         db.session.add(student_user)
         db.session.commit()
-        session['account_type'] = 'student'
+        session['student'] = student_user.student_id
         flash('Success!')
 
         return redirect('/complete-student-profile')
@@ -56,17 +56,41 @@ def register_coach_user():
         coach_user = crud.create_coach_login(email, password)
         db.session.add(coach_user)
         db.session.commit()
-        session['account_type'] = 'coach'
+        session['coach'] = coach_user.coach_id
         flash('Success!')
 
-        return redirect('/complete-student-profile')
+        return redirect('/complete-coach-profile')
 
 
 @app.route('/complete-student-profile')
-def complete_profile():
-    '''Finish creating a student profile'''
+def show_student_form():
+    '''Shows the student profile completion form'''
 
     return render_template('complete-student-profile.html')
+
+
+@app.route('/complete-student-profile', methods=['POST'])
+def finish_student_profile():
+    '''Creates a student profile after registration'''
+
+    # Placeholder.  Should redirect to the student profile page
+    return redirect('/complete-student-profile')
+
+
+@app.route('/complete-coach-profile')
+def show_coach_form():
+    '''Shows the coach profile completion form'''
+
+    return render_template('complete-coach-profile.html')
+
+
+@app.route('/complete-coach-profile', methods=['POST'])
+def finish_coach_profile():
+    '''Creates a coach profile after registration'''
+
+    # This line is a placeholder.
+    # Needs to go to the coach's profile page
+    return redirect('/complete-coach-profile')
 
 
 
