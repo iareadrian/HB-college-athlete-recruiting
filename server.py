@@ -34,7 +34,8 @@ def register_student_user():
         student_user = crud.create_student_login(email, password)
         db.session.add(student_user)
         db.session.commit()
-        session['student'] = student_user.student_id
+        session['user_id'] = student_user.student_id
+        session['role'] = 'student'
         flash('Success!')
 
         return redirect('/complete-student-profile')
@@ -56,7 +57,8 @@ def register_coach_user():
         coach_user = crud.create_coach_login(email, password)
         db.session.add(coach_user)
         db.session.commit()
-        session['coach'] = coach_user.coach_id
+        session['user_id'] = coach_user.coach_id
+        session['role'] = 'coach'
         flash('Success!')
 
         return redirect('/complete-coach-profile')
@@ -66,6 +68,8 @@ def register_coach_user():
 def show_student_form():
     '''Shows the student profile completion form'''
 
+
+
     return render_template('complete-student-profile.html')
 
 
@@ -73,6 +77,28 @@ def show_student_form():
 def finish_student_profile():
     '''Creates a student profile after registration'''
 
+    student = crud.get_student_by_id(session['user_id'])
+    print(student)
+
+    #
+    student.fname = request.form.get('fname')
+    student.lname = request.form.get('lname')
+    student.gender = request.form.get('gender')
+    student.height = int(request.form.get('height'))
+    student.weight = int(request.form.get('weight'))
+
+    #make dropdown menu for things that are already seeded in the db
+    student.sport_name = request.form.get('sport')
+    student.position_id = int(request.form.get('position'))
+    # student.location_id = int(request.form.get('location'))
+    # 2.0 allow users to type a location
+
+    student.bio = request.form.get('bio')
+
+
+    db.session.commit()
+    print('****************************')
+    print(student)
 
     return redirect('/student-profile')
 
@@ -81,7 +107,11 @@ def finish_student_profile():
 def show_student_profile():
     '''Show student profile'''
 
-    return render_template('student-profile.html')
+    # pull student info from student in session
+
+    student = crud.get_student_by_id(session['user_id'])
+
+    return render_template('student-profile.html', student=student)
 
 @app.route('/complete-coach-profile')
 def show_coach_form():
@@ -94,8 +124,7 @@ def show_coach_form():
 def finish_coach_profile():
     '''Creates a coach profile after registration'''
 
-    # This line is a placeholder.
-    # Needs to go to the coach's profile page
+
     return redirect('/coach-profile')
 
 

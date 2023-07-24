@@ -58,6 +58,12 @@ def get_student_by_email(student_email):
     return model.Student.query.filter(model.Student.student_email == student_email).first()
 
 
+def get_student_by_id(student_id):
+    '''Get a student by student id'''
+
+    return model.Student.query.get(student_id)
+
+
 def create_student_login(student_email, student_password):
     '''Create and return new student login credentials'''
 
