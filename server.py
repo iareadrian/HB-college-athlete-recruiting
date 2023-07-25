@@ -18,6 +18,13 @@ def homepage():
     return render_template('homepage.html')
 
 
+@app.route('/login', methods=['POST'])
+def login_user():
+    '''Log users in'''
+
+# TODO: finish login route
+
+
 @app.route('/register/student', methods=['POST'])
 def register_student_user():
     '''Create a new student user'''
@@ -35,7 +42,7 @@ def register_student_user():
         db.session.add(student_user)
         db.session.commit()
         session['user_id'] = student_user.student_id
-        session['role'] = 'student'
+        session['user_type'] = 'student'
         flash('Success!')
 
         return redirect('/complete-student-profile')
@@ -58,7 +65,7 @@ def register_coach_user():
         db.session.add(coach_user)
         db.session.commit()
         session['user_id'] = coach_user.coach_id
-        session['role'] = 'coach'
+        session['user_type'] = 'coach'
         flash('Success!')
 
         return redirect('/complete-coach-profile')
@@ -67,7 +74,6 @@ def register_coach_user():
 @app.route('/complete-student-profile')
 def show_student_form():
     '''Shows the student profile completion form'''
-
 
 
     return render_template('complete-student-profile.html')
@@ -80,21 +86,20 @@ def finish_student_profile():
     student = crud.get_student_by_id(session['user_id'])
     print(student)
 
-    #
     student.fname = request.form.get('fname')
     student.lname = request.form.get('lname')
     student.gender = request.form.get('gender')
     student.height = int(request.form.get('height'))
     student.weight = int(request.form.get('weight'))
 
-    #make dropdown menu for things that are already seeded in the db
+    # Make dropdown menu for things that are already seeded in the db
     student.sport_name = request.form.get('sport')
     student.position_id = int(request.form.get('position'))
-    # student.location_id = int(request.form.get('location'))
+    student.location_id = int(request.form.get('location'))
+
     # 2.0 allow users to type a location
 
     student.bio = request.form.get('bio')
-
 
     db.session.commit()
     print('****************************')
@@ -112,6 +117,7 @@ def show_student_profile():
     student = crud.get_student_by_id(session['user_id'])
 
     return render_template('student-profile.html', student=student)
+
 
 @app.route('/complete-coach-profile')
 def show_coach_form():
@@ -135,6 +141,17 @@ def show_coach_profile():
     return render_template('coach-profile.html')
 
 
+@app.route('/logout', methods=['POST'])
+def user_logout():
+    '''Log users out'''
+
+    user_type = session.get('user_type')
+
+    if user_type == 'student':
+        session.pop('student', None)
+    flash('You have successfully logged out')
+
+    return redirect('/')
 
 
 if __name__ == '__main__':

@@ -3,7 +3,19 @@
 {% block title %} Student Profile {% endblock %}
 
 {% block body %}
-<h1>Student profile data should be displayed here</h1>
-<h1>{{ student.fname }} {{ student.student_id }}</h1>
-<h2>{{ student.position.position_name }}</h2>
+<div id="student-profile">
+    <h1>Student Profile</h1>
+    <p>Name:  {{ student.fname }} {{student.lname}}</p>
+    <p>Gender:  {{ student.gender }}</p>
+    <p>Height:  {{ student.height }} inches</p>
+    <p>Weight:  {{ student.weight }} pounds</p>
+    <p>Sport:  {{ student.sport_name }}</p>
+    <p>Position:  {{ student.position.position_name }}</p>
+    <p>Location:  {{ student.location.city }}, {{student.location.state}}</p>
+    <p>Bio:  {{ student.bio }}</p>
+</div>
+
+<form action="/logout", method="POST">
+    <input type="submit" value="Log Out">
+</form>
 {% endblock %}
