@@ -29,12 +29,14 @@ def create_student_user(student_email,
                       location_id=location_id)
     return student
 
+
 def create_sport(sport_name):
     '''Create and return a new sport'''
 
     sport = model.Sport(sport_name=sport_name)
 
     return sport
+
 
 def create_position(position_name, sport_name=None):
     '''Create and return a new positon'''

@@ -22,7 +22,36 @@ def homepage():
 def login_user():
     '''Log users in'''
 
-# TODO: finish login route
+    email = request.form.get('email')
+    password = request.form.get('password')
+    user_type = request.form.get('user_type')
+
+    if user_type == 'student':
+        student = crud.get_student_by_email(email)
+
+        if not student or student.student_password != password:
+            flash('The email or password you entered was incorrect. Try again.')
+
+            return redirect('/')
+        else:
+            session['user_id'] = student.student_id
+            session['user_type'] = 'student'
+            flash('Login Successful!')
+
+            return redirect('/student-profile')
+
+    elif user_type == 'coach':
+        coach = crud.get_coach_by_email(email)
+
+        if not coach or coach.coach_password != password:
+            flash('The email or password you entered was incorrect. Try again.')
+
+            return redirect('/')
+        else:
+            session['user_id'] = coach.coach_id
+            session['user_type'] = 'coach'
+
+            return redirect('/coach-profile')
 
 
 @app.route('/register/student', methods=['POST'])
