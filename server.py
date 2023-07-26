@@ -50,6 +50,7 @@ def login_user():
         else:
             session['user_id'] = coach.coach_id
             session['user_type'] = 'coach'
+            flash('Login Successful!')
 
             return redirect('/coach-profile')
 
@@ -113,7 +114,6 @@ def finish_student_profile():
     '''Creates a student profile after registration'''
 
     student = crud.get_student_by_id(session['user_id'])
-    print(student)
 
     student.fname = request.form.get('fname')
     student.lname = request.form.get('lname')
@@ -131,8 +131,6 @@ def finish_student_profile():
     student.bio = request.form.get('bio')
 
     db.session.commit()
-    print('****************************')
-    print(student)
 
     return redirect('/student-profile')
 
@@ -159,6 +157,15 @@ def show_coach_form():
 def finish_coach_profile():
     '''Creates a coach profile after registration'''
 
+    coach = crud.get_coach_by_id(session['user_id'])
+
+    coach.fname = request.form.get('fname')
+    coach.lname = request.form.get('lname')
+    coach.school_id = int(request.form.get('school'))
+    coach.sport_name = request.form.get('sport')
+    coach.bio = request.form.get('bio')
+
+    db.session.commit()
 
     return redirect('/coach-profile')
 
@@ -167,8 +174,18 @@ def finish_coach_profile():
 def show_coach_profile():
     '''Show coach profile'''
 
-    return render_template('coach-profile.html')
+    coach = crud.get_coach_by_id(session['user_id'])
 
+    return render_template('coach-profile.html', coach=coach)
+
+
+@app.route('/search')
+def show_search():
+    '''Displays search page'''
+
+    # TODO:  create search page html and finish route
+
+    return redirect('/')
 
 @app.route('/logout', methods=['POST'])
 def user_logout():

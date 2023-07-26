@@ -95,6 +95,12 @@ def create_coach_user(coach_email,
     return coach
 
 
+def get_coach_by_id(coach_id):
+    '''Get a coach user by coach id'''
+
+    return model.Coach.query.get(coach_id)
+
+
 def get_coach_by_email(coach_email):
     '''Return a coach user by email'''
 
