@@ -184,8 +184,18 @@ def show_search():
     '''Displays search page'''
 
     # TODO:  create search page html and finish route
+    user_type = session.get('user_type')
 
-    return redirect('/')
+    if user_type == 'student':
+        student = crud.get_student_by_id(session['user_id'])
+
+        return render_template('search-coaches.html', student=student)
+
+    elif user_type == 'coach':
+        coach = crud.get_coach_by_id(session['user_id'])
+
+        return render_template('search-students.html', coach=coach)
+
 
 @app.route('/logout', methods=['POST'])
 def user_logout():

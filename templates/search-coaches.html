@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} Search Coaches {% endblock %}
+
+{% block body %}
+<h1>Display Search Coaches form here</h1>
+<p>
+    Current student:  {{ student.student_id }} {{ student.fname }} {{ student.lname }}
+</p>
+
+<form action="/logout", method="POST">
+    <input type="submit" value="Log Out">
+</form>
+{% endblock %}
