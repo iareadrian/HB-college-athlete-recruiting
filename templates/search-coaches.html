@@ -8,6 +8,33 @@
     Current student:  {{ student.student_id }} {{ student.fname }} {{ student.lname }}
 </p>
 
+    <h2>Find your next coach!</h2>
+
+    <!--Placeholder: create a route for search results-->
+    <form action="/search">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+        </div>
+        <label for="school">School:</label>
+        <div id="school">
+            <select name="school" id="school">
+                <option value="1">UC Berkeley</option>
+            </select>
+        </div>
+        <label for="sport">Sport:</label>
+        <div id="sport">
+            <select name="sport" id="sport">
+                <option value="basketball">Basketball</option>
+            </select>
+        </div>
+    </form>
+
+<!--Placeholder: create a route for search results-->
+<form action="/search">
+    <input type="submit" value="Search">
+</form>
+
 <form action="/logout", method="POST">
     <input type="submit" value="Log Out">
 </form>
