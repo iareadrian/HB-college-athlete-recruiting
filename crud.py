@@ -116,6 +116,21 @@ def create_coach_login(coach_email, coach_password):
     return coach_login
 
 
+def search_coaches(fname=None, lname=None, school_id=None, sport_name=None):
+    '''Search for coaches'''
+
+    # FIXME: This query assumes all search fields will be filled in
+    # Separate, then chain queries together so users don't have to enter every field
+    coaches = model.Coach.query.filter(model.Coach.fname == fname,
+                                       model.Coach.lname == lname,
+                                       model.Coach.school_id == school_id,
+                                       model.Coach.sport_name == sport_name).all()
+
+    print('******************')
+
+    return coaches
+
+
 def create_school(school_name, location_id=None):
     '''Create and return a new school'''
 
@@ -127,3 +142,15 @@ def create_school(school_name, location_id=None):
 if __name__ == '__main__':
     from server import app
     model.connect_to_db(app)
+
+
+'''if the values for all the fields are empty, show no results
+otherwise chain queries
+first select all coaches
+if a value has been provided to the first name field
+take the query, and add the chain
+if the field last name, has a value
+take the query, add it to the chain
+...
+execute the query at the end .all()
+gets the result that we can pass forward'''

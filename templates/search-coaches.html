@@ -11,14 +11,18 @@
     <h2>Find your next coach!</h2>
 
     <!--Placeholder: create a route for search results-->
-    <form action="/search">
-        <div>
-            <label for="fname">First Name:</label>
-            <input type="text" id="fname" name="lname">
+    <form id="search-coaches">
+        <label for="fname">First Name:</label>
+        <div id="fname">
+            <select name="fname" id="fname">
+                <option value="Mark">Mark</option>
+            </select>
         </div>
-        <div>
-            <label for="lname">Last Name:</label>
-            <input type="text" id="lname" name="lname">
+        <label for="lname">Last Name:</label>
+        <div id="lname">
+            <select name="lname" id="lname">
+                <option value="Fox">Fox</option>
+            </select>
         </div>
         <label for="school">School:</label>
         <div id="school">
@@ -32,10 +36,10 @@
                 <option value="basketball">Basketball</option>
             </select>
         </div>
-    </form>
 
-<!--Placeholder: create a route for search results-->
-<form action="/search">
+
+<!--do ajax request here(post request)
+    send the form data. gets teh form data repackaged, then fix the queries to the db)-->
     <input type="submit" value="Search">
 </form>
 

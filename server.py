@@ -179,12 +179,11 @@ def show_coach_profile():
     return render_template('coach-profile.html', coach=coach)
 
 
-@app.route('/search')
+@app.route('/new-search')
 def show_search():
     '''Displays search page'''
 
     # TODO:  create routes that execute a search and display results
-    # TODO:  finish search student form
     user_type = session.get('user_type')
 
     if user_type == 'student':
@@ -196,6 +195,53 @@ def show_search():
         coach = crud.get_coach_by_id(session['user_id'])
 
         return render_template('search-students.html', coach=coach)
+
+
+@app.route('/search', methods=['GET', 'POST'])
+def run_search():
+    '''Run a user search'''
+
+    user_type = session.get('user_type')
+
+    if user_type == 'student':
+        student = crud.get_student_by_id(session['user_id'])
+
+        fname = request.form.get('fname')
+        lname = request.form.get('lname')
+        school_id = int(request.form.get('school'))
+        sport_name = request.form.get('sport')
+
+        # implement search logic here
+
+        search_results = crud.search_coaches(fname, lname, school_id, sport_name)
+
+        return redirect('search-coaches-results.html')
+
+    elif user_type == 'coach':
+        coach = crud.get_coach_by_id(session['user_id'])
+
+        fname = request.form.get('fname')
+        lname = request.form.get('lname')
+        gender = request.form.get('gender')
+        height = request.form.get('height')
+        weight = request.form.get('weight')
+        sport_name = request.form.get('sport')
+        location_id = request.form.get('location')
+
+        # implement search logic here
+
+        return render_template('search-students-results.html', coach=coach)
+
+
+@app.route('/search/results/student', methods=['GET'])
+def view_search_results():
+    '''Show search results for coach profiles'''
+
+    student = crud.get_student_by_id(session['user_id'])
+
+    return render_template('search-coaches-results.html', studnet=student)
+
+
 
 
 @app.route('/logout', methods=['POST'])
