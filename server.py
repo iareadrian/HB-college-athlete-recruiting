@@ -183,7 +183,8 @@ def show_coach_profile():
 def show_search():
     '''Displays search page'''
 
-    # TODO:  create search page html and finish route
+    # TODO:  create routes that execute a search and display results
+    # TODO:  finish search student form
     user_type = session.get('user_type')
 
     if user_type == 'student':
