@@ -1,6 +1,6 @@
 '''Server for college athlete recruiting app'''
 
-from flask import Flask, render_template, request, flash, session, redirect
+from flask import Flask, render_template, request, flash, session, redirect, jsonify
 from jinja2 import StrictUndefined
 from model import connect_to_db, db
 import crud
@@ -213,33 +213,58 @@ def run_search():
 
         # implement search logic here
 
-        search_results = crud.search_coaches(fname, lname, school_id, sport_name)
-
-        return redirect('search-coaches-results.html')
-
-    elif user_type == 'coach':
-        coach = crud.get_coach_by_id(session['user_id'])
-
-        fname = request.form.get('fname')
-        lname = request.form.get('lname')
-        gender = request.form.get('gender')
-        height = request.form.get('height')
-        weight = request.form.get('weight')
-        sport_name = request.form.get('sport')
-        location_id = request.form.get('location')
-
-        # implement search logic here
-
-        return render_template('search-students-results.html', coach=coach)
+        coaches = crud.search_coaches(fname, lname, school_id, sport_name)
 
 
-@app.route('/search/results/student', methods=['GET'])
+        return redirect('/search/results/coaches')
+
+    # elif user_type == 'coach':
+    #     coach = crud.get_coach_by_id(session['user_id'])
+
+    #     fname = request.form.get('fname')
+    #     lname = request.form.get('lname')
+    #     gender = request.form.get('gender')
+    #     height = request.form.get('height')
+    #     weight = request.form.get('weight')
+    #     sport_name = request.form.get('sport')
+    #     location_id = request.form.get('location')
+
+    #     # implement search logic here
+
+    #     return render_template('search-students-results.html', coach=coach)
+
+
+@app.route('/search/results/coaches', methods=['POST'])
 def view_search_results():
     '''Show search results for coach profiles'''
 
     student = crud.get_student_by_id(session['user_id'])
 
-    return render_template('search-coaches-results.html', studnet=student)
+    fname = request.json.get('fname')
+    lname = request.json.get('lname')
+    school_id = int(request.json.get('school'))
+    sport_name = request.json.get('sport')
+
+    coaches = crud.search_coaches(fname, lname, school_id, sport_name)
+
+    # turn coaches into a list of dictionaries
+    # turn the list of dictionaries into json using jsonify
+    # keys match the attributes of the coach object,
+    # values match the values stored in each attribute
+
+    search_result = []
+    for coach in coaches:
+        coach_dict = {
+            'fname': coach.fname,
+            'lname': coach.lname,
+            'school_id': coach.school_id,
+            'sport_name': coach.sport_name
+        }
+        search_result.append(coach_dict)
+
+
+    return jsonify(search_result)
+    # return render_template('search-coaches-results.html', studnet=student)
 
 
 

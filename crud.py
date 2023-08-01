@@ -126,7 +126,11 @@ def search_coaches(fname=None, lname=None, school_id=None, sport_name=None):
                                        model.Coach.school_id == school_id,
                                        model.Coach.sport_name == sport_name).all()
 
-    print('******************')
+    print("Received search parameters:")
+    print("fname:", fname)
+    print("lname:", lname)
+    print("school_id:", school_id)
+    print("sport_name:", sport_name)
 
     return coaches
 

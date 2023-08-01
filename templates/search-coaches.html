@@ -11,7 +11,7 @@
     <h2>Find your next coach!</h2>
 
     <!--Placeholder: create a route for search results-->
-    <form id="search-coaches">
+    <form action="/search/results/coaches" method="POST" id="search-coaches">
         <label for="fname">First Name:</label>
         <div id="fname">
             <select name="fname" id="fname">
@@ -40,10 +40,12 @@
 
 <!--do ajax request here(post request)
     send the form data. gets teh form data repackaged, then fix the queries to the db)-->
-    <input type="submit" value="Search">
+    <button type="submit" id="search-btn">Search</button>
 </form>
 
 <form action="/logout", method="POST">
     <input type="submit" value="Log Out">
 </form>
+
+<script src="static/studentSearchResults.js"></script>
 {% endblock %}
