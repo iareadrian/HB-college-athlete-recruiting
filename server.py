@@ -257,7 +257,7 @@ def view_search_results():
         coach_dict = {
             'fname': coach.fname,
             'lname': coach.lname,
-            'school_id': coach.school_id,
+            'school_id': coach.school.school_name,
             'sport_name': coach.sport_name
         }
         search_result.append(coach_dict)
