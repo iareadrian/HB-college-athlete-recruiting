@@ -282,6 +282,8 @@ def view_student_search_results():
     position_id = int(request.json.get('position'))
     location_id = int(request.json.get('location'))
 
+    # insert search_students() here when fixed
+
 
 
 @app.route('/logout', methods=['POST'])

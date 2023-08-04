@@ -121,18 +121,40 @@ def search_students(fname=None, lname=None, gender=None, height=None,
                     location_id=None):
     '''Search for students'''
 
-    # TODO: query chaining
     search = model.db.session.query(model.Student.fname,
                                     model.Student.lname,
                                     model.Student.gender,
                                     model.Student.height,
                                     model.Student.weight,
                                     model.Student.sport_name,
-                                    model.Student.position_id,
-                                    model.Student.location_id)
+                                    model.Position.position_name,
+                                    model.Location.city,
+                                    model.Location.state)
 
+    if fname:
+        search = search.filter(model.Student.fname == fname)
 
+    if lname:
+        search = search.filter(model.Student.lname == lname)
 
+    if gender:
+        search = search.filter(model.Student.gender == gender)
+
+    if height:
+        search = search.filter(model.Student.height == height)
+
+    if weight:
+        search = search.filter(model.Student.weight == weight)
+
+    if sport_name:
+        search = search.filter(model.Student.sport_name == sport_name)
+
+    if position_id:
+        search = search.filter(model.Student.location_id == location_id)
+
+    students = search.join(model.Position).join(model.Location).all()
+
+    # Tests to display parameters
     print("Received search parameters:")
     print("fname:", fname)
     print("lname:", lname)
@@ -143,7 +165,7 @@ def search_students(fname=None, lname=None, gender=None, height=None,
     print("position_id:", position_id)
     print("location_id:", location_id)
 
-    return search
+    return students
 
 
 def search_coaches(fname=None, lname=None, school_id=None, sport_name=None):
@@ -168,6 +190,7 @@ def search_coaches(fname=None, lname=None, school_id=None, sport_name=None):
 
     coaches = search.join(model.School).all()
 
+    # Tests to display parameters
     print("Received search parameters:")
     print("fname:", fname)
     print("lname:", lname)
