@@ -116,15 +116,57 @@ def create_coach_login(coach_email, coach_password):
     return coach_login
 
 
+def search_students(fname=None, lname=None, gender=None, height=None,
+                    weight=None, sport_name=None, position_id=None,
+                    location_id=None):
+    '''Search for students'''
+
+    # TODO: query chaining
+    search = model.db.session.query(model.Student.fname,
+                                    model.Student.lname,
+                                    model.Student.gender,
+                                    model.Student.height,
+                                    model.Student.weight,
+                                    model.Student.sport_name,
+                                    model.Student.position_id,
+                                    model.Student.location_id)
+
+
+
+    print("Received search parameters:")
+    print("fname:", fname)
+    print("lname:", lname)
+    print("gender:", gender)
+    print("height:", height)
+    print("weight:", weight)
+    print("sport_name:", sport_name)
+    print("position_id:", position_id)
+    print("location_id:", location_id)
+
+    return search
+
+
 def search_coaches(fname=None, lname=None, school_id=None, sport_name=None):
     '''Search for coaches'''
 
-    # FIXME: This query assumes all search fields will be filled in
-    # Separate, then chain queries together so users don't have to enter every field
-    coaches = model.Coach.query.filter(model.Coach.fname == fname,
-                                       model.Coach.lname == lname,
-                                       model.Coach.school_id == school_id,
-                                       model.Coach.sport_name == sport_name).all()
+    search = model.db.session.query(model.Coach.fname,
+                                       model.Coach.lname,
+                                       model.School.school_name,
+                                       model.Coach.sport_name)
+
+    if fname:
+        search = search.filter(model.Coach.fname == fname)
+
+    if lname:
+        search = search.filter(model.Coach.lname == lname)
+
+    if school_id:
+        search = search.filter(model.Coach.school_id == school_id)
+
+    if sport_name:
+        search = search.filter(model.Coach.sport_name == sport_name)
+
+    coaches = search.join(model.School).all()
 
     print("Received search parameters:")
     print("fname:", fname)

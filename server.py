@@ -235,7 +235,7 @@ def run_search():
 
 
 @app.route('/search/results/coaches', methods=['POST'])
-def view_search_results():
+def view_coach_search_results():
     '''Show search results for coach profiles'''
 
     student = crud.get_student_by_id(session['user_id'])
@@ -251,13 +251,13 @@ def view_search_results():
     # turn the list of dictionaries into json using jsonify
     # keys match the attributes of the coach object,
     # values match the values stored in each attribute
-
+    print(coaches)
     search_result = []
     for coach in coaches:
         coach_dict = {
             'fname': coach.fname,
             'lname': coach.lname,
-            'school_id': coach.school.school_name,
+            'school_id': coach.school_name,
             'sport_name': coach.sport_name
         }
         search_result.append(coach_dict)
@@ -266,6 +266,21 @@ def view_search_results():
     return jsonify(search_result)
     # return render_template('search-coaches-results.html', studnet=student)
 
+
+@app.route('/search/results/students', methods=['POST'])
+def view_student_search_results():
+    '''Show search results for student profiles'''
+
+    coach = crud.get_coach_by_id(session['user_id'])
+
+    fname = request.json.get('fname')
+    lname = request.json.get('lname')
+    gender = request.json.get('gender')
+    height = int(request.json.get('height'))
+    weight = int(request.json.get('weight'))
+    sport_name = request.json.get('sport')
+    position_id = int(request.json.get('position'))
+    location_id = int(request.json.get('location'))
 
 
 
