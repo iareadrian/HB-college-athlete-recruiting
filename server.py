@@ -211,27 +211,22 @@ def run_search():
         school_id = int(request.form.get('school'))
         sport_name = request.form.get('sport')
 
-        # implement search logic here
-
         coaches = crud.search_coaches(fname, lname, school_id, sport_name)
-
 
         return redirect('/search/results/coaches')
 
-    # elif user_type == 'coach':
-    #     coach = crud.get_coach_by_id(session['user_id'])
+    elif user_type == 'coach':
+        coach = crud.get_coach_by_id(session['user_id'])
 
-    #     fname = request.form.get('fname')
-    #     lname = request.form.get('lname')
-    #     gender = request.form.get('gender')
-    #     height = request.form.get('height')
-    #     weight = request.form.get('weight')
-    #     sport_name = request.form.get('sport')
-    #     location_id = request.form.get('location')
+        fname = request.form.get('fname')
+        lname = request.form.get('lname')
+        gender = request.form.get('gender')
+        height = request.form.get('height')
+        weight = request.form.get('weight')
+        sport_name = request.form.get('sport')
+        location_id = request.form.get('location')
 
-    #     # implement search logic here
-
-    #     return render_template('search-students-results.html', coach=coach)
+        return redirect('/search/results/students')
 
 
 @app.route('/search/results/coaches', methods=['POST'])
@@ -262,9 +257,7 @@ def view_coach_search_results():
         }
         search_result.append(coach_dict)
 
-
     return jsonify(search_result)
-    # return render_template('search-coaches-results.html', studnet=student)
 
 
 @app.route('/search/results/students', methods=['POST'])
@@ -282,8 +275,24 @@ def view_student_search_results():
     position_id = int(request.json.get('position'))
     location_id = int(request.json.get('location'))
 
-    # insert search_students() here when fixed
+    students = crud.search_students(fname, lname, gender, height, weight,
+                                    sport_name, position_id, location_id)
 
+    search_result = []
+    for student in students:
+        student_dict = {
+            'fname': student.fname,
+            'lname': student.lname,
+            'gender': student.gender,
+            'height': student.height,
+            'weight': student.weight,
+            'sport_name': student.sport_name,
+            'position_id': student.position_name,
+            'location_id': (student.city, student.state)
+        }
+        search_result.append(student_dict)
+
+    return jsonify(student_dict)
 
 
 @app.route('/logout', methods=['POST'])
