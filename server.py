@@ -292,7 +292,7 @@ def view_student_search_results():
         }
         search_result.append(student_dict)
 
-    return jsonify(student_dict)
+    return jsonify(search_result)
 
 
 @app.route('/logout', methods=['POST'])

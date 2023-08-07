@@ -62,10 +62,14 @@
             <option value="2">Berkeley, California</option>
         </select>
     </div>
-    <input type="submit" value="Search">
+    <button type="submit" id="search-btn">Search</button>
 </form>
 
 <form action="/logout", method="POST">
     <input type="submit" value="Log Out">
 </form>
+
+<div id="results-container"></div>
+
+<script src="static/coachSearchResults.js"></script>
 {% endblock %}
