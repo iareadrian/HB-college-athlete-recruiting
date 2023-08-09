@@ -18,7 +18,8 @@ const displayResults = (searchResults) => {
         resultElement.innerHTML = (
             `Coach: ${result.fname} ${result.lname}<br>`
             + `School: ${result.school_id}<br>`
-            + `Sport: ${result.sport_name}<br><br>`
+            + `Sport: ${result.sport_name}<br>`
+            + `Email: ${result.coach_email}<br><br>`
         );
         resultsContainer.appendChild(resultElement);
     });

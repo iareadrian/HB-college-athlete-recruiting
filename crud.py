@@ -174,7 +174,8 @@ def search_coaches(fname=None, lname=None, school_id=None, sport_name=None):
     search = model.db.session.query(model.Coach.fname,
                                        model.Coach.lname,
                                        model.School.school_name,
-                                       model.Coach.sport_name)
+                                       model.Coach.sport_name,
+                                       model.Coach.coach_email)
 
     if fname:
         search = search.filter(model.Coach.fname == fname)
