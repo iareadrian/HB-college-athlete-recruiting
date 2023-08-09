@@ -11,7 +11,9 @@ const displayResults = (searchResults) => {
             + `Weight: ${result.weight} pounds<br>`
             + `Sport: ${result.sport_name}<br>`
             + `Position: ${result.position_id}<br>`
-            + `Location: ${result.location_id}<br><br>`
+            + `Location: ${result.location_id}<br>`
+            + `Bio: ${result.bio}<br>`
+            + `Email: <a href="mailto:${result.student_email}">${result.student_email}</a><br><br>`
         );
         resultsContainer.appendChild(resultElement);
     });

@@ -129,7 +129,9 @@ def search_students(fname=None, lname=None, gender=None, height=None,
                                     model.Student.sport_name,
                                     model.Position.position_name,
                                     model.Location.city,
-                                    model.Location.state)
+                                    model.Location.state,
+                                    model.Student.bio,
+                                    model.Student.student_email)
 
     if fname:
         search = search.filter(model.Student.fname == fname)
@@ -175,6 +177,7 @@ def search_coaches(fname=None, lname=None, school_id=None, sport_name=None):
                                        model.Coach.lname,
                                        model.School.school_name,
                                        model.Coach.sport_name,
+                                       model.Coach.bio,
                                        model.Coach.coach_email)
 
     if fname:

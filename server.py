@@ -254,6 +254,7 @@ def view_coach_search_results():
             'lname': coach.lname,
             'school_id': coach.school_name,
             'sport_name': coach.sport_name,
+            'bio': coach.bio,
             'coach_email': coach.coach_email
         }
         search_result.append(coach_dict)
@@ -289,7 +290,9 @@ def view_student_search_results():
             'weight': student.weight,
             'sport_name': student.sport_name,
             'position_id': student.position_name,
-            'location_id': (student.city, student.state)
+            'location_id': (student.city, student.state),
+            'bio': student.bio,
+            'student_email': student.student_email
         }
         search_result.append(student_dict)
 

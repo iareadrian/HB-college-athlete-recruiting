@@ -19,7 +19,8 @@ const displayResults = (searchResults) => {
             `Coach: ${result.fname} ${result.lname}<br>`
             + `School: ${result.school_id}<br>`
             + `Sport: ${result.sport_name}<br>`
-            + `Email: ${result.coach_email}<br><br>`
+            + `Bio: ${result.bio}<br>`
+            + `Email: <a href="mailto:${result.coach_email}">${result.coach_email}</a><br><br>`
         );
         resultsContainer.appendChild(resultElement);
     });
