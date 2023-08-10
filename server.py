@@ -5,10 +5,15 @@ from jinja2 import StrictUndefined
 from model import connect_to_db, db
 import crud
 import os
+from twilio.rest import Client
 
 app = Flask(__name__)
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 app.jinja_env.undefined = StrictUndefined
+
+account_sid = os.environ['TWILIO_ACCOUNT_SID']
+auth_token = os.environ['TWILIO_AUTH_TOKEN']
+client = Client(account_sid, auth_token)
 
 
 @app.route('/')
@@ -260,6 +265,25 @@ def view_coach_search_results():
         search_result.append(coach_dict)
 
     return jsonify(search_result)
+
+
+@app.route('/send_coach_sms', methods=['POST'])
+def send_coach_sms():
+    '''Use Twilio API to send SMS message to coach users'''
+
+    student = crud.get_student_by_id(session['user_id'])
+
+    message = client.messages \
+                .create(
+                     messaging_service_sid=os.environ['MESSAGING_SERVICE'],
+                     body="Hi Coach, this is Student.  Here's my phone number XXX-XXX-XXXX, if you'd like to chat, feel free to text or call",
+                     to=os.environ['TEST_PHONE_NUM']
+                 )
+
+
+    return {'status': 'Success! Message sent.'}
+
+
 
 
 @app.route('/search/results/students', methods=['POST'])
