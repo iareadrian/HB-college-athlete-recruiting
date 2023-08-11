@@ -276,14 +276,11 @@ def send_coach_sms():
     message = client.messages \
                 .create(
                      messaging_service_sid=os.environ['MESSAGING_SERVICE'],
-                     body="Hi Coach, this is Student.  Here's my phone number XXX-XXX-XXXX, if you'd like to chat, feel free to text or call",
+                     body="Hi Coach, this is Student.  Here's my phone number XXX-XXX-XXXX.  If you'd like to chat, feel free to text or call",
                      to=os.environ['TEST_PHONE_NUM']
-                 )
+                )
 
-
-    return {'status': 'Success! Message sent.'}
-
-
+    return {'msg_status': 'Success! Message sent.'}
 
 
 @app.route('/search/results/students', methods=['POST'])
@@ -321,6 +318,22 @@ def view_student_search_results():
         search_result.append(student_dict)
 
     return jsonify(search_result)
+
+
+@app.route('/send_student_sms', methods=['POST'])
+def send_student_sms():
+    '''Use Twilio API to send SMS message to student users'''
+
+    coach = crud.get_coach_by_id(session['user_id'])
+    custom_message = "Hi Student, this is Coach " + coach.fname + coach.lname + ".  Here's my phone number XXX-XXX-XXXX. If you'd like to chat, feel free to text or call"
+    message = client.messages \
+                .create(
+                     messaging_service_sid=os.environ['MESSAGING_SERVICE'],
+                     body=custom_message,
+                     to=os.environ['TEST_PHONE_NUM']
+                )
+
+    return {'msg_status': 'Success! Message sent.'}
 
 
 @app.route('/logout', methods=['POST'])

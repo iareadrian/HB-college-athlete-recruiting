@@ -4,6 +4,8 @@ const displayResults = (searchResults) => {
 
     searchResults.forEach((result) => {
         resultElement = document.createElement('div');
+        messageBtn = document.createElement('button');
+        messageBtn.innerText = 'Send SMS';
         resultElement.innerHTML = (
             `Student: ${result.fname} ${result.lname}<br>`
             + `Gender: ${result.gender}<br>`
@@ -13,8 +15,22 @@ const displayResults = (searchResults) => {
             + `Position: ${result.position_id}<br>`
             + `Location: ${result.location_id}<br>`
             + `Bio: ${result.bio}<br>`
-            + `Email: <a href="mailto:${result.student_email}">${result.student_email}</a><br><br>`
+            + `Email: <a href="mailto:${result.student_email}">${result.student_email}</a><br>`
         );
+        resultElement.appendChild(messageBtn);
+        messageBtn.addEventListener('click', (event) => {
+            fetch('/send_student_sms', {
+                method: 'POST',
+                body: JSON.stringify({coachMsg: 'message'}),
+                headers: {
+                    'Content-type': 'application.json'
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    alert(data.msg_status);
+                });
+        });
         resultsContainer.appendChild(resultElement);
     });
 };

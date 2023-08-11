@@ -29,14 +29,14 @@ const displayResults = (searchResults) => {
         messageBtn.addEventListener('click', (event) => {
             fetch('/send_coach_sms', {
                 method: 'POST',
-                body: JSON.stringify({hey: 'message'}),   // placeholder object
+                body: JSON.stringify({studentMsg: 'message'}),   // placeholder object
                 headers: {
                     'Content-type': 'application,json'
                 },
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    alert(data.status);
+                    alert(data.msg_status);
                 });
             // insert server route here to call twilio api
             // use another ajax call here to send a message to the server to send the message
