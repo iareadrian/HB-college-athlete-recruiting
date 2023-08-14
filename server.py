@@ -2,6 +2,7 @@
 
 from flask import Flask, render_template, request, flash, session, redirect, jsonify
 from jinja2 import StrictUndefined
+from flask_bcrypt import Bcrypt
 from model import connect_to_db, db
 import crud
 import os
@@ -10,6 +11,7 @@ from twilio.rest import Client
 app = Flask(__name__)
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 app.jinja_env.undefined = StrictUndefined
+bcrypt = Bcrypt(app)
 
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
@@ -67,13 +69,15 @@ def register_student_user():
     email = request.form.get('email')
     password = request.form.get('password')
 
+    hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+
     student_user = crud.get_student_by_email(email)
     if student_user:
         flash('An account with that email already exists. Try again.')
 
         return redirect('/')
     else:
-        student_user = crud.create_student_login(email, password)
+        student_user = crud.create_student_login(email, hashed_password)
         db.session.add(student_user)
         db.session.commit()
         session['user_id'] = student_user.student_id

@@ -12,13 +12,13 @@ class Student(db.Model):
 
     student_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     student_email = db.Column(db.String(50), unique=True)
-    student_password = db.Column(db.String(50))
+    student_password = db.Column(db.String) # testing bcrypt
     fname = db.Column(db.String(30))
     lname = db.Column(db.String(30))
     gender = db.Column(db.String(20))
     height = db.Column(db.Integer)
     weight = db.Column(db.Integer)
-    sport_name = db.Column(db.String(30), db.ForeignKey('sports.sport_name')) 
+    sport_name = db.Column(db.String(30), db.ForeignKey('sports.sport_name'))
     position_id = db.Column(db.Integer, db.ForeignKey('positions.position_id'))
     location_id = db.Column(db.Integer, db.ForeignKey('locations.location_id'))
     bio = db.Column(db.String)
@@ -33,7 +33,7 @@ class Student(db.Model):
             f'student_email = {self.student_email}, '
             f'fname = {self.fname}>'
         )
-    
+
 
 class Coach(db.Model):
     '''Coach user'''
@@ -66,7 +66,7 @@ class Sport(db.Model):
     __tablename__ = 'sports'
 
     sport_name = db.Column(db.String(30), primary_key=True)
-    
+
     students = db.relationship('Student', back_populates='sport')
     positions = db.relationship('Position', back_populates='sport')
     coaches = db.relationship('Coach', back_populates='sport')
@@ -74,7 +74,7 @@ class Sport(db.Model):
 
     def __repr__(self):
         return f'<Sport sport_name = {self.sport_name}>'
-            
+
 
 class Position(db.Model):
     '''Athlete's position on the team'''
@@ -87,7 +87,7 @@ class Position(db.Model):
 
     students = db.relationship('Student', back_populates='position')
     sport = db.relationship('Sport', back_populates='positions')
-    
+
     def __repr__(self):
         return (
             f'<Position position_id = {self.position_id}, '
@@ -107,13 +107,13 @@ class School(db.Model):
     location = db.relationship('Location', back_populates='schools')
     coaches = db.relationship('Coach', back_populates='school')
     sports = db.relationship('Sport', secondary='sports_schools', back_populates='schools')
-     
+
 
     def __repr__(self):
         return (
             f'<School school_id = {self.school_id}, '
             f'school_name = {self.school_name}>'
-        ) 
+        )
 
 
 class SportSchool(db.Model):
@@ -129,8 +129,8 @@ class SportSchool(db.Model):
         return (
             f'<SportSchool sportschool_id = {self.sportschool_id}, '
             f'sport_name = {self.sport_name}>'
-        ) 
-    
+        )
+
 
 class Location(db.Model):
     '''U.S. locations by city and state'''

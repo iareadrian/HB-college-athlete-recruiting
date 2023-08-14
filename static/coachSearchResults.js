@@ -17,6 +17,7 @@ const displayResults = (searchResults) => {
             + `Bio: ${result.bio}<br>`
             + `Email: <a href="mailto:${result.student_email}">${result.student_email}</a><br>`
         );
+        // messageBtn.setAttribute('name', result.student_email)
         resultElement.appendChild(messageBtn);
         messageBtn.addEventListener('click', (event) => {
             fetch('/send_student_sms', {
