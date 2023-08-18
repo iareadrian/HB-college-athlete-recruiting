@@ -3,35 +3,38 @@
 {% block title %} Finish Registration {% endblock %}
 
 {% block body %}
-<h1>Finish creating your profile!</h1>
-
-<form action="/complete-coach-profile" method="POST">
-    <div>
-        <label for="fname">First Name:</label>
-        <input type="text" id="fname" name="fname">
+<div class="row">
+    <div class="d-flex justify-content-center">
+        <form action="/complete-coach-profile" method="POST">
+            <h1>Finish creating your profile!</h1>
+            <div>
+                <label for="fname">First Name:</label>
+                <input type="text" id="fname" name="fname" class="form-control">
+            </div>
+            <div>
+                <label for="lname">Last Name:</label>
+                <input type="text" id="lname" name="lname" class="form-control">
+            </div>
+            <div>
+                <label for="bio">Bio:</label>
+                <input type="text" id="bio" name="bio" class="form-control">
+            </div>
+            <label for="school">School:</label>
+            <div id="school">
+                <select name="school" id="school">
+                    <option value="1">UC Berkeley</option>
+                </select>
+            </div>
+            <label for="sport">Sport:</label>
+            <div id="sport">
+                <select name="sport" id="sport">
+                    <option value="basketball">Basketball</option>
+                </select>
+            </div>
+            <div>
+                <input type="submit" value="Create Profile">
+            </div>
+        </form>
     </div>
-    <div>
-        <label for="lname">Last Name:</label>
-        <input type="text" id="lname" name="lname">
-    </div>
-    <label for="school">School:</label>
-    <div id="school">
-        <select name="school" id="school">
-            <option value="1">UC Berkeley</option>
-        </select>
-    </div>
-    <label for="sport">Sport:</label>
-    <div id="sport">
-        <select name="sport" id="sport">
-            <option value="basketball">Basketball</option>
-        </select>
-    </div>
-    <div>
-        <label for="bio">Bio</label>
-        <input type="text" id="bio" name="bio">
-    </div>
-    <div>
-        <input type="submit">
-    </div>
-</form>
+</div>
 {% endblock %}

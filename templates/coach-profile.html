@@ -3,19 +3,23 @@
 {% block title %} Coach Profile {% endblock %}
 
 {% block body %}
-<div id="coach-profile">
-    <h1>Coach Profile</h1>
-    <p>Name:  {{ coach.fname }} {{ coach.lname }}</p>
-    <p>School:  {{ coach.school.school_name }}</p>
-    <p>Sport:  {{ coach.sport.sport_name }}</p>
-    <p>Bio:  {{ coach.bio }}</p>
+<div class="row align-items-center justify-content-center
+            static-height" id="coach-profile">
+    <div class="col-5 text-center">
+        <h1>Coach Profile</h1>
+        <p>Name:  {{ coach.fname }} {{ coach.lname }}</p>
+        <p>School:  {{ coach.school.school_name }}</p>
+        <p>Sport:  {{ coach.sport.sport_name }}</p>
+        <p>Bio:  {{ coach.bio }}</p>
+        <form action="/new-search">
+            <input type="submit" value="Search Students">
+        </form>
+
+        <form action="/logout", method="POST">
+            <input type="submit" value="Log Out">
+        </form>
+    </div>
 </div>
 
-<form action="/new-search">
-    <input type="submit" value="Search Students">
-</form>
 
-<form action="/logout", method="POST">
-    <input type="submit" value="Log Out">
-</form>
 {% endblock %}
