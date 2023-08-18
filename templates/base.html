@@ -12,7 +12,7 @@
         {% block head %}{% endblock %}
 
     </head>
-    <body>
+    <body class="d-flex justify-content-center align-items-center min-vw-100 min-vh-100">
         {% for msg in get_flashed_messages() %}
             <p class="flash-msg">
                 {{ msg }}
