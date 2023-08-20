@@ -26,7 +26,7 @@ model.db.session.add(student_city_state)
 model.db.session.commit()
 
 # Create 3 test student users
-for n in range(3):
+for n in range(10):
     student_email = f'student_user{n}@test.com'
     student_password = 'test'
     fname = 'Chef'
@@ -55,7 +55,7 @@ model.db.session.add(uc_berkeley)
 model.db.session.commit()
 
 # Create 3 test coach users
-for n in range(3):
+for n in range(10):
     coach_email = f'coach_user{n}@test.com'
     coach_password = 'test'
     fname = 'Mark'
