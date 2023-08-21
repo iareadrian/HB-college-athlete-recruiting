@@ -3,24 +3,27 @@
 {% block title %} Student Profile {% endblock %}
 
 {% block body %}
-<div class="row align-items-center justify-content-center
-            static-height" id="student-profile">
-    <div class="col-5 text-center">
-        <h1>Student Profile</h1>
-        <p>Name:  {{ student.fname }} {{ student.lname }}</p>
-        <p>Gender:  {{ student.gender }}</p>
-        <p>Height:  {{ student.height }} inches</p>
-        <p>Weight:  {{ student.weight }} pounds</p>
-        <p>Sport:  {{ student.sport_name }}</p>
-        <p>Position:  {{ student.position.position_name }}</p>
-        <p>Location:  {{ student.location.city }}, {{ student.location.state }}</p>
-        <p>Bio:  {{ student.bio }}</p>
-        <form action="/new-search">
-            <input type="submit" value="Search Coaches">
-        </form>
-        <form action="/logout", method="POST">
-            <input type="submit" value="Log Out">
-        </form>
+<div class="row justify-content-center align-items-center" id="student-profile">
+    <div class="card col-4">
+        <div class="card-body">
+            <div class="text-center">
+                <h1>Student Profile</h1>
+                <p>Name:  {{ student.fname }} {{ student.lname }}</p>
+                <p>Gender:  {{ student.gender }}</p>
+                <p>Height:  {{ student.height }} inches</p>
+                <p>Weight:  {{ student.weight }} pounds</p>
+                <p>Sport:  {{ student.sport_name }}</p>
+                <p>Position:  {{ student.position.position_name }}</p>
+                <p>Location:  {{ student.location.city }}, {{ student.location.state }}</p>
+                <p>Bio:  {{ student.bio }}</p>
+                <form action="/new-search">
+                    <input type="submit" value="Search Coaches">
+                </form>
+                <form action="/logout", method="POST">
+                    <input type="submit" value="Log Out">
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
