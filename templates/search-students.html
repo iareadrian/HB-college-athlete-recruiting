@@ -16,8 +16,8 @@
 </section>
 -->
 
-<section class="h-100 mx-3 full-columns">
-    <div class="row h-100">
+
+    <div class="row">
         <aside class="col-4 h-100 bg-light d-flex justify-content-center">
             <div class="container my-4 text-center">
                 <form action="/search/results/students" method="POST" id="search-students">
@@ -34,7 +34,7 @@
                             <option value="Curry">Curry</option>
                         </select>
                     </div>
-                    <label for="gender">Gender</label>
+                    <label for="gender">Gender:</label>
                     <div id="gender">
                         <input type="radio" name="gender" value="male" id="male">
                         <label for="male">Male</label>
@@ -84,7 +84,7 @@
             <div id="results-container"></div>
         </main>
     </div>
-</section>
+
 
 <script src="static/coachSearchResults.js"></script>
 {% endblock %}

@@ -4,6 +4,7 @@ const displayResults = (searchResults) => {
 
     searchResults.forEach((result) => {
         resultElement = document.createElement('div');
+        resultElement.classList.add('profile-card')
         messageBtn = document.createElement('button');
         messageBtn.innerText = 'Send SMS';
         resultElement.innerHTML = (

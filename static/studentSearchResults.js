@@ -15,6 +15,7 @@ const displayResults = (searchResults) => {
 
     searchResults.forEach((result) => {
         resultElement = document.createElement('div');
+        resultElement.classList.add('profile-card');
         messageBtn = document.createElement('button')
         messageBtn.innerText = 'Send SMS'
         resultElement.innerHTML = (
@@ -22,7 +23,7 @@ const displayResults = (searchResults) => {
             + `School: ${result.school_id}<br>`
             + `Sport: ${result.sport_name}<br>`
             + `Bio: ${result.bio}<br>`
-            + `Email: <a href="mailto:${result.coach_email}">${result.coach_email}</a><br><br>`
+            + `Email: <a href="mailto:${result.coach_email}">${result.coach_email}</a><br>`
             // create element for button and add into the loop
         );
         resultElement.appendChild(messageBtn)
