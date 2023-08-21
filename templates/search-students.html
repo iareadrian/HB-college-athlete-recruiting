@@ -3,6 +3,7 @@
 {% block title %} Find your next Super Star! {% endblock %}
 
 {% block body %}
+<!--
 <section class="container">
     <div class="row justify-content-center align-items-center">
       <div class="col-8 text-center">
@@ -12,70 +13,71 @@
         </p>
       </div>
     </div>
-  </section>
+</section>
+-->
 
 <section class="h-100 mx-3 full-columns">
     <div class="row h-100">
         <aside class="col-4 h-100 bg-light d-flex justify-content-center">
             <div class="container my-4 text-center">
-            <form action="/search/results/students" method="POST" id="search-students">
-                <h2>Search Athletes</h2>
-                <label for="fname">First Name:</label>
-                <div id="fname">
-                    <select name="fname" id="fname">
-                        <option value="Chef">Chef</option>
-                    </select>
-                </div>
-                <label for="lname">Last Name:</label>
-                <div id="lname">
-                    <select name="lname" id="lname">
-                        <option value="Curry">Curry</option>
-                    </select>
-                </div>
-                <label for="gender">Gender</label>
-                <div id="gender">
-                    <input type="radio" name="gender" value="male" id="male">
-                    <label for="male">Male</label>
+                <form action="/search/results/students" method="POST" id="search-students">
+                    <h2>Search Athletes</h2>
+                    <label for="fname">First Name:</label>
+                    <div id="fname">
+                        <select name="fname" id="fname">
+                            <option value="Chef">Chef</option>
+                        </select>
+                    </div>
+                    <label for="lname">Last Name:</label>
+                    <div id="lname">
+                        <select name="lname" id="lname">
+                            <option value="Curry">Curry</option>
+                        </select>
+                    </div>
+                    <label for="gender">Gender</label>
+                    <div id="gender">
+                        <input type="radio" name="gender" value="male" id="male">
+                        <label for="male">Male</label>
 
-                    <input type="radio" name="gender" value="female" id="female">
-                    <label for="female">Female</label>
-                </div>
-                <label for="height">Height in inches:</label>
-                <div id="height">
-                    <select name="height" id="height">
-                        <option value="75">75</option>
-                    </select>
-                </div>
-                <label for="weight">Weight in pounds:</label>
-                <div id="weight">
-                    <select name="weight" id="weight">
-                        <option value="190">190</option>
-                    </select>
-                </div>
-                <label for="sport">Sport:</label>
-                <div id="sport">
-                    <select name="sport" id="sport">
-                        <option value="basketball">Basketball</option>
-                    </select>
-                </div>
-                <label for="position">Position:</label>
-                <div id="position">
-                    <select name="position" id="position">
-                        <option value="1">Point Guard</option>
-                    </select>
-                </div>
-                <label for="location">Location:</label>
-                <div id="location">
-                    <select name="location" id="location">
-                        <option value="1">Oakland, California</option>
-                        <option value="2">Berkeley, California</option>
-                    </select>
-                </div>
-                <button type="submit" id="search-btn">Search</button>
-            </form>
-            <form action="/logout", method="POST">
-                <input type="submit" value="Log Out">
-            </form>
+                        <input type="radio" name="gender" value="female" id="female">
+                        <label for="female">Female</label>
+                    </div>
+                    <label for="height">Height in inches:</label>
+                    <div id="height">
+                        <select name="height" id="height">
+                            <option value="75">75</option>
+                        </select>
+                    </div>
+                    <label for="weight">Weight in pounds:</label>
+                    <div id="weight">
+                        <select name="weight" id="weight">
+                            <option value="190">190</option>
+                        </select>
+                    </div>
+                    <label for="sport">Sport:</label>
+                    <div id="sport">
+                        <select name="sport" id="sport">
+                            <option value="basketball">Basketball</option>
+                        </select>
+                    </div>
+                    <label for="position">Position:</label>
+                    <div id="position">
+                        <select name="position" id="position">
+                            <option value="1">Point Guard</option>
+                        </select>
+                    </div>
+                    <label for="location">Location:</label>
+                    <div id="location">
+                        <select name="location" id="location">
+                            <option value="1">Oakland, California</option>
+                            <option value="2">Berkeley, California</option>
+                        </select>
+                    </div>
+                    <button type="submit" id="search-btn">Search</button>
+                </form>
+                <form action="/logout", method="POST">
+                    <input type="submit" value="Log Out">
+                </form>
             </div>
         </aside>
         <main class="col h-100 overflow-auto" id="results">

@@ -1,4 +1,12 @@
 #results {
     max-height: 535px;
-    overflow: scroll;
+    overflow: auto;
+}
+
+.student-registration {
+    margin-right: 20px;
+}
+
+.coach-registration {
+    margin-left: 20px;
 }
