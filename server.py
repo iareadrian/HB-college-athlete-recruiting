@@ -340,7 +340,7 @@ def send_student_sms():
     return {'msg_status': 'Success! Message sent.'}
 
 
-@app.route('/logout', methods=['POST'])
+@app.route('/logout', methods=['GET', 'POST'])
 def user_logout():
     '''Log users out'''
 
