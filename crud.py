@@ -142,10 +142,10 @@ def search_students(fname=None, lname=None, gender=None, height=None,
     if gender:
         search = search.filter(model.Student.gender == gender)
 
-    if height:
+    if height is not None and height != -1:
         search = search.filter(model.Student.height == height)
 
-    if weight:
+    if weight is not None and weight != -1:
         search = search.filter(model.Student.weight == weight)
 
     if sport_name:

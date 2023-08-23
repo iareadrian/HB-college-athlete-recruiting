@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
 #results {
     max-height: 1080px;
     overflow: auto;
@@ -12,7 +16,18 @@
 }
 
 .profile-card {
-    border: 1px solid #ccc;
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
     padding: 10px;
     margin: 10px 0;
+}
+
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700; /* Bold weight */
+}
+
+body {
+    background-color: #efefef;
+    font-family: 'Roboto', sans-serif;
 }
