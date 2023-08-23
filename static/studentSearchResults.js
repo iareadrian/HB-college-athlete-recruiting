@@ -16,8 +16,9 @@ const displayResults = (searchResults) => {
     searchResults.forEach((result) => {
         resultElement = document.createElement('div');
         resultElement.classList.add('profile-card');
-        messageBtn = document.createElement('button')
-        messageBtn.innerText = 'Send SMS'
+        messageBtn = document.createElement('button');
+        messageBtn.classList.add('btn', 'btn-success')
+        messageBtn.innerText = 'Send This User A Text';
         resultElement.innerHTML = (
             `Coach: ${result.fname} ${result.lname}<br>`
             + `School: ${result.school_id}<br>`
